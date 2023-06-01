@@ -120,3 +120,7 @@ const listeners = [
 for (const [i, btn] of errorBtns.entries()) {
   btn.addEventListener('click', listeners[i])
 }
+
+window.addEventListener('click', () => {
+  console.log('Sadly an error happened my friend')
+})
