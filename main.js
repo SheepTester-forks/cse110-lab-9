@@ -89,6 +89,24 @@ const listeners = [
   // Trigger a Global Error
   () => {
     boom()
+  },
+  // Load something
+  async function () {
+    this.disabled = true
+    try {
+      const response = await fetch(
+        'https://cse110-sp23-group20.github.io/fortune-teller/source/home-page/Images/Background.png'
+      )
+      this.textContent = (await response.blob()).size
+    } catch (error) {
+      if (error instanceof TypeError) {
+        this.textContent = 'Network error'
+      } else {
+        throw error
+      }
+    } finally {
+      this.disabled = false
+    }
   }
 ]
 
