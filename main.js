@@ -8,6 +8,10 @@ form.addEventListener('submit', e => {
   output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`)
 })
 
+class HttpError extends Error {
+  name = this.constructor.name
+}
+
 let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'))
 
 // Start your code here
@@ -97,6 +101,9 @@ const listeners = [
       const response = await fetch(
         'https://cse110-sp23-group20.github.io/fortune-teller/source/home-page/Images/Background.png'
       )
+      if (!response.ok) {
+        throw new HttpError(`HTTP ${response.status} error`)
+      }
       this.textContent = (await response.blob()).size
     } catch (error) {
       if (error instanceof TypeError) {
